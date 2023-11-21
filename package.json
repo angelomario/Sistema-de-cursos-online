@@ -1,0 +1,11 @@
+{
+  "name": "sistema-de-cursos-online",
+  "version": "1.0.0",
+  "description": "Sistema que possibilita fazer cursos online",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
