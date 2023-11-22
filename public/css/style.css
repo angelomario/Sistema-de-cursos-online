@@ -1,0 +1,49 @@
+/*Cores do sistema*/
+
+:root{
+    --colorgray:#89918e;
+    --colorgrey:#6d696a;
+    --colorSmokeGray: #a2a7a5;
+    --colorLight:#fff;
+    --colorBeige:#e2dadb;
+    --colorViolet: #8332ac;
+    --colorDarkViolet: #462749;
+}
+.text-gray{
+    color: var(--colorgray);
+}
+.bg-gray{
+    background-color: var(--colorgray);    
+}
+.text-Sgray{
+    color: var(--colorSmokeGray);
+}
+.bg-Sgray{
+    background-color: var(--colorSmokeGray);
+}
+.text-beige{
+    color: var(--colorBeige);
+}
+.bg-beige{
+    background-color: var(--colorBeige);
+}
+.text-grey{
+    color: var(--colorgrey);
+}
+.bg-grey{
+    background-color: var(--colorgrey);
+}
+.text-violet{
+    color: var(--colorViolet);
+}
+.bg-violet{
+    background-color: var(--colorViolet);
+}
+.text-DarkViolet{
+    color: var(--colorDarkViolet);
+}
+.bg-DarkViolet{
+    background-color: var(--colorDarkViolet);
+}
+
+
