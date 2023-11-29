@@ -45,5 +45,11 @@
 .bg-DarkViolet{
     background-color: var(--colorDarkViolet);
 }
+.text-small{
+    font-size: small;
+}
+.none{
+    display: none !important;
+}
 
 

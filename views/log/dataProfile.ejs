@@ -1,0 +1,32 @@
+<%- include("../partials/headlink") %>
+
+<div class="container d-flex align-item-center mt-5">
+        <div class="row mx-auto col-12 col-xl-10 py-4 border">
+            <form id="" action="/user/save" class="form col-12 col-md-8 col-lg-6 rounded-0 border-end p-3" method="post">
+                <div class="row text-center mt-4 mb-5"><h2 class="text-danger">Falta pouco</h2></div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="nome" required class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Nome completo</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input required type="date" name="nascimento" class="form-control" id="floatingPassword" placeholder="data">
+                    <label for="floatingPassword">Data de nascimento</label>
+                </div>
+                <div class="form-floating">
+                    <select class="form-select" name="genero" id="floatingSelect" aria-label="Floating label select example">
+                      <option selected value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                    </select>
+                    <label for="floatingSelect">Gênero</label>
+                </div>
+                <div class="col-12 mt-5 mb-4 text-center">
+                    <button type="submit" class="btn py-2 btn-danger rounded-0 col-12">Concluir cadastro</button>
+                </div>
+            </form>
+            <div class="d-flex align-items-center col col-12 col-md-4 col-lg-6">
+                <img src="/img/undraw_access_account_re_8spm.svg" alt="" class="col">
+            </div>
+        </div>
+</div>
+
+<%- include("../partials/footerlink") %>
