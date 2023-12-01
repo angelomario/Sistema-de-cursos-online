@@ -44,6 +44,11 @@ router.post("/data/complete",(req,res)=>{
     res.render("log/dataProfile");
 })
 
+
+router.get("/user/curso",(req,res)=>{
+    res.render("user/course");
+})
+
 //Rota de registro de alunos
 router.get("/register",(req,res)=>{
     res.render("log/register");

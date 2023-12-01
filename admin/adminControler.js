@@ -1,15 +1,17 @@
 const express=require("express");
 const fs=require("fs-extra");
 const multer=require("multer");
+const Cursos=require("../cursos/Cursos");
 const router=express.Router();
 
-const folder="public/upload/cursos/";
+const folder="upload/cursos/";
+const folderPoster="upload/poster/";
 
 
 //Receber arquivo com multer
 const storage=multer.diskStorage({
     destination: function(req,arquive,cb){
-        cb(null,folder);
+        cb(null,"public/"+folderPoster);
     },
     filename:function(req,arquive,cb){
         cb(null,arquive.originalname)
@@ -19,20 +21,21 @@ const upload= multer({storage})
 
 
 router.post("/curso/save",upload.single("file"),(req,res)=>{
-
+    let caminho=req.body.filename;
     let titulo=req.body.titulo;
-    let file=req.body.file;
+
     
-    if(!fs.existsSync(folder+titulo)){
-        fs.mkdirSync(folder+titulo)
+    if(!fs.existsSync("public/"+folder+titulo)){
+        fs.mkdirSync("public/"+folder+titulo);
     }
-    
-    let ver={
+    console.log({
         titulo:titulo,
-        file:file
-    }
-    console.log(ver)
-    res.json(ver)
+        file:folderPoster+caminho
+    })
+    res.json({
+        titulo:titulo,
+        file:folderPoster+caminho
+    })
 })
 
 router.get("/admin",(req,res)=>{
