@@ -18,8 +18,8 @@ const Admin= connection.define("admins",{
         type: sequelize.STRING,
         allowNull:false
     },
-    idade:{
-        type: sequelize.ENUM("Masculino","Feminino"),
+    nascimento:{
+        type: sequelize.STRING,
         allowNull:false
     }
 });

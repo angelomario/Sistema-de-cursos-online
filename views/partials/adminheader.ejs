@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-    <title>Online Academy</title>
+    <title>Academy</title>
     <!-- Style -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- Bootstrap core CSS -->
@@ -66,15 +66,18 @@ https://templatemo.com/tm-569-edu-meeting
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
-                          <li class=""><a href="/" class="active">Home</a></li>
-                          <li class="scroll-to-section"><a href="#courses">Estudantes</a></li> 
-                          <li class=""><a href="#courses">Cursos</a></li>
+                          <li class=""><a href="/admin/<%= admin.id %>" class="">Meu painel</a></li>
                           <li class="has-sub">
                             <a href="javascript:void(0)">Pages</a>
                             <ul class="sub-menu">
-                                <li class=""><a href="/">Sair</a></li> 
+                              <li class=""><a href="/" class="active">Home</a></li>
+                              <li class="" data-bs-toggle="modal" data-bs-target="#meusdados"><a href="#" class="">Meus dados</a></li>
+                              <li class=""><a href="/adminlogout">Sair</a></li> 
                               </ul>
                           </li>
+                          <li><a href="/admin/<%= admin.id %>#estudantes">Estudantes</a></li> 
+                          <li class=""><a href="/admin/<%= admin.id %>#cursos">Cursos</a></li>
+                          
                       </ul>        
                       <a class='menu-trigger'>
                           <span>Menu</span>

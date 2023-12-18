@@ -1,6 +1,7 @@
 const sequelize=require("sequelize");
 const connection=require("../database/database");
 const Cursos=require("../cursos/Cursos");
+const slugfy=require("slugify");
 
 
 

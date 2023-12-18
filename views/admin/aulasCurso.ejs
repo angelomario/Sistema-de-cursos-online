@@ -1,0 +1,127 @@
+<%- include("../partials/adminheader.ejs") %>
+  <section class="heading-page header-text" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h6>Administrar aulas</h6>
+          <h2>Olá <%= admin.nome.split(" ")[0] %></h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adicionar aulas -->
+  <section class="meetings-page py-4 my-0 rounded-0" id="meetings">
+    <div class="row mx-auto">
+      <div class="row mx-auto">
+        <div class="col-lg-10 mx-auto p-1 p-md-2 p-lg-5">
+          <div class="row">
+            <div class="col-lg-12 p-0">
+              <div class="bg-light meeting-single-item py-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col h5 d-flex jutify-content-between align-items-center text-muted">
+                            <div class="col-3">
+                              <img src="/<%= curso.capa %>" alt="" class="col">
+                            </div>
+                            <div class="col px-2">
+                              <h2 class="display-6 text-muted"><%= curso.titulo %></h2>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                <div class="down-content rounded-0 my-2">
+                  <div class="container text-center">
+                    <div class="row text-start">
+                      <h5>Aulas</h5>
+                    </div>
+                    
+                      <%  if(curso.aulas[0] == undefined){ %>
+                        <div class="col text-center">
+                          <h3 class="display-6 text-muted">Sem aulas</h3>
+                      
+                     <% }else{ %>
+                      <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+                      <% curso.aulas.forEach(aula=>{ %>
+                      
+                      <div class="col">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="col">
+                              <h5><%= aula.id %></h5>
+                              <p><%= aula.titulo.split(".")[0] %></p>
+                              <form action="/aula/remove/<%= admin.id %>" method="post">
+                                <input type="hidden" name="cursoId" value="<%= curso.id %>">
+                                <input type="hidden" name="aula" value="public/upload/cursos/<%= curso.titulo %>/<%= aula.titulo %>">
+                                <input type="hidden" name="aulaId" value="<%= aula.id %>">
+                                <button type="submit" class="btn btn-sm btn-outline-danger mt-2 col-12 rounded-0">Remover</button>
+                              </form>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <% }) 
+                    }
+                      %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col text-center">
+                    <button class="btn btn-outline-danger px-4 rounded-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Adicionar aula</button>
+                  </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!--Modal Adicionar aulas -->
+  <form action="/aula/save/<%= curso.titulo %>/<%= admin.id %>" enctype="multipart/form-data" onsubmit="value(event, this)" method="post" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content rounded-0">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Adicionar aula nova</h1>
+          <i type="button" class="fa fa-close text-danger" data-bs-dismiss="modal" aria-label="Close"></i>
+        </div>
+        <div class="modal-body">
+        <div class="input-group">
+          <span class="input-group-text bg-light" id="inputGroupPrepend3">Buscar video</span>
+          <input name="file" required type="file" class="form-control" id="filename" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+          <input type="hidden" value="<%= curso.id %>" name="cursoId">
+        </div>
+        <p class="small text-danger text-center mx-auto none" id="video_erro">O arquivo deve ser um video</p>
+        <input type="hidden" name="filename" id="send">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn rounded-0 btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger rounded-0">Salvar aula</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!--Fim Modal adicionar aulas -->
+
+  <script>
+    function value(event,elemento){
+      let erro=document.querySelector("#video_erro");
+      let caminho=document.querySelector("#filename").value.split("\\");
+      let file=caminho[caminho.length - 1];
+      let extensao= file.split(".");
+      if((extensao[extensao.length - 1] == "mp4") || (extensao[extensao.length - 1] == "mkv")){
+        erro.classList.add("none");
+        document.querySelector("#send").value=file;
+        event.submit();
+      }else{
+        erro.classList.remove("none");
+        event.preventDefault();
+      }
+      
+    }
+    let pasta="/";
+  </script>
+    <%- include("../partials/footer") %>

@@ -4,8 +4,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h6>Só tu terás acesso a este perfil</h6>
-          <h2>Bem vindo Angelo Mário</h2>
+          <h6>Sinta-se a vontade</h6>
+          <h2>Olá <%= usuario.nome.split(" ")[0] %></h2>
         </div>
       </div>
     </div>
@@ -15,60 +15,55 @@
   <section class="meetings-page py-4 my-0 rounded-0" id="meetings">
     <div class="row mx-auto">
       <div class="row mx-auto">
-        <div class="col-lg-12 p-1 p-md-2 p-lg-5">
+        <div class="col-lg-10 mx-auto p-1 p-md-2 p-lg-5">
           <div class="row">
             <div class="col-lg-12 p-0">
               <div class="meeting-single-item">
-                <div class="thumb">
-                  <img class="rounded-0" src="/assets/images/single-meeting.jpg" alt=""></a>
+                <div class="col-12 m-0 p-0">
+                  <video id="video_aula" controls src="" poster="/<%=curso.capa%>" class="col-12 m-0 p-0"></video>
                 </div>
                 <div class="down-content rounded-0">
                   <div class="container">
                     <div class="row mb-5">
-                      <h2 class="h4 text-muted">Html, Css e Javascript</h2>
+                      <h2 class="h4"><%= curso.titulo %></h2>
                       <div class="col h5 d-flex jutify-content-between text-muted">
                         <div class="col">
-                          <span>1</span>
-                        <span>Sintaxe de assincronia e pernmanencia de dados</span>
+                          <span class="atual"></span>
+                        <span class="atual small"></span>
                         </div>
-                        <span>1h30min</span>
+                      
                       </div>
                       <hr>
                     </div>
                     <sp class="row"></sp>
                   </div>
                   <div class="container text-center">
-                    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
-                      <div class="col">
-                        <div class="p-3">Row column</div>
-                      </div>
+                    <div class="row text-start">
+                      <h5>Aulas</h5>
+                    </div>
+                    <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+                      
+                      <% if(curso.aulas[0] != undefined){
+                       curso.aulas.forEach(aula=>{%>
+                        <div class="col">
+                          <div class="card" onclick="video(this)">
+                            <div class="card-body">
+                              <div class="col">
+                                <h5 class="order">0</h5>
+                                <p id="titulo"><%= aula.titulo.split(".")[0] %></p>
+                                <input type="hidden" class="caminho" value="<%= aula.titulo %>">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <% })
+                    }else{ %>
+                        <div class="col text-center">
+                          <h3 class="text-muted">Sem aulas</h3>
+                        </div>
+
+                      <% } %>
+                      
                     </div>
                   </div>
                 </div>
@@ -78,193 +73,30 @@
           </div>
         </div>
       </div>
+      <div class="col text-center"><a href="/user/<%=usuario.id%>" class="btn btn-outline-danger px-4 rounded-0">Voltar</a></div>
     </div>
 
-    <!-- Aulas -->
-    <section class="meetings-page p-0" id="meetings">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="filters">
-                <ul>
-                  <li data-filter="*"  class="active">All Meetings</li>
-                  <li data-filter=".soon">Soon</li>
-                  <li data-filter=".imp">Important</li>
-                  <li data-filter=".att">Attractive</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="row grid">
-                <div class="col-lg-4 templatemo-item-col all soon">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$14.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-01.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>12</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>New Lecturers Meeting</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$22.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-02.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>14</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Online Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all soon">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$24.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-03.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>16</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Network Teaching Concept</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$32.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-04.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>18</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Online Teaching Tools</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$34.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-02.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>22</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>New Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$45.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-03.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>24</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Technology Conference</h4></a>
-                      <p>TemplateMo is the best website<br>when it comes to Free CSS.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all imp att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$52.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-01.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>27</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Online Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all soon imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$64.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-02.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>28</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Instant Lecture Design</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att soon">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$74.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="/assets/images/meeting-03.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>30</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Online Social Networking</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="pagination">
-                <ul>
-                  <li><a href="#">1</a></li>
-                  <li class="active"><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <script>
+      
+      
+      async function video(elemento){
+        let caminho= elemento.querySelector(".caminho").value;
+        let ordem=elemento.querySelector(".order").innerText;
+        let titulo=elemento.querySelector("#titulo").innerText;
+        let aula=document.getElementById("video_aula");
+        let videoAtual = document.querySelectorAll(".atual");
+
+        videoAtual[0].innerHTML=ordem+" - ";
+        videoAtual[1].innerHTML=titulo;
+        await aula.setAttribute("src","/upload/cursos/<%=curso.titulo%>/"+caminho);
+        aula.play();
+        console.log(caminho);
+      }
+      setTimeout(()=>{
+        let aulas=document.querySelectorAll(".order");
+        for(i=0; i<= aulas.length; i++){
+          aulas[i].innerHTML=i + 1;
+        }
+      },1000)
+    </script>
 <%- include("../partials/footer") %>

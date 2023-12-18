@@ -51,5 +51,29 @@
 .none{
     display: none !important;
 }
+.responsive-height{
+    height: 400px;   
+}
+.gradient{
+    background: radial-gradient(rgba(0, 0, 0, 0.459), transparent, transparent);
 
+}
+/* Lg */
+@media (min-width: 991.98px){
+    .responsive-height{
+        height: 493px;
+    }   
+}
+/* Md */
+@media (max-width: 768px){
+    .responsive-height{
+        height: 380px;
 
+    }   
+}
+/* Sm */
+@media (max-width: 575.98px){
+    .responsive-height{
+        height: 373px;
+    }   
+}

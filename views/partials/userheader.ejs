@@ -66,15 +66,17 @@ https://templatemo.com/tm-569-edu-meeting
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
-                          <li class=""><a href="/" class="active">Home</a></li>
-                          <li class="scroll-to-section"><a href="#apply">Meus dados</a></li>
-                          <li class="scroll-to-sectio"><a href="/user#courses">Meus Cursos</a></li> 
+                          <li class=""><a href="/user/<%=usuario.id%>" class="">Meu painel</a></li>
                           <li class="has-sub">
                             <a href="javascript:void(0)">Pages</a>
                             <ul class="sub-menu">
-                                <li class=""><a href="/">Sair</a></li> 
+                              <li class=""><a href="/" class="active">Home</a></li>
+                              <li class=""><a href="/userlogout">Sair</a></li> 
                               </ul>
                         </li>
+                          <li class="scroll-to-section" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a href="/user/<%=usuario.id%>">Meus dados</a></li>
+                          <li class=""><a href="/user/<%=usuario.id%>#mine-courses">Meus Cursos</a></li> 
+                          
                       </ul>        
                       <a class='menu-trigger'>
                           <span>Menu</span>

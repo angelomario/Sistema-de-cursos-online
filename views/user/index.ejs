@@ -5,248 +5,187 @@
       <div class="row">
         <div class="col-lg-12">
           <h6>Só tu terás acesso a este perfil</h6>
-          <h2>Bem vindo Angelo Mário</h2>
+          <h2>Bem vindo <%= usuario.nome.split(" ")[0] %></h2>
         </div>
       </div>
     </div>
   </section>
 
-<!--Our courses-->
+<!--Modal Meus dado -->
+<form action="/user/delete/acount/<%= usuario.id %>" enctype="multipart/form-data" onsubmit="deletar(event, this)" method="post" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded-0">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Meus Dados</h1>
+        <i type="button" class="fa fa-close text-danger" data-bs-dismiss="modal" aria-label="Close"></i>
+      </div>
+      <input type="hidden" value="<%= usuario.nome %>" id="usuario">
+      <div class="modal-body">
+        <ul>
+          <li>
+            <h5>Nome: <%= usuario.nome %></h5> 
+          </li>
+          <li>
+            <h5>Email: <%= usuario.email %></h5>
+          </li>
+          <li>
+            <h5>Gênero: <%= usuario.genero %></h5>
+          </li>
+          <li>
+            <h5>Data de nascimento: <%= usuario.nascimento %></h5>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn rounded-0 btn-outline-danger">Deletar conta</button>
+        <button type="button" class="btn btn-danger rounded-0 px-5" data-bs-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!--Todos cursos-->
 <section class="our-courses" id="courses">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="section-heading">
-            <h2>Meus Cursos</h2>
+            <h2>Todos os Cursos</h2>
           </div>
         </div>
         <div class="col-lg-12">
           <div class="owl-courses-item owl-carousel">
-            <div class="item">
-              <img src="assets/images/course-01.jpg" alt="Course One">
-              <div class="down-content">
-                <h4>Desenvolvimento Web Front-end</h4>
-                <div class="info">
-                  <div class="row">
-                    <a href="/user/curso" class="btn btn-sm btn-outline-danger mx-auto rounded-0">Ver curso</a>
-                  </div>
-                </div>
+            <% if(cursos[0] == undefined ){ %>
+                <div class="col text-center"> 
+                <h3 class="text-muted">Sem cursos</h3>
               </div>
-            </div>
-            <div class="item">
-              <img src="assets/images/course-02.jpg" alt="Course Two">
-              <div class="down-content">
-                <h4>Curabitur molestie dignissim purus vel</h4>
-                <div class="info">
-                  <div class="row">
-                    <div class="col-8">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                      </ul>
-                    </div>
-                    <div class="col-4">
-                       <span>$180</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
+           <% } else{
+              cursos.forEach(curso=>{ %>
 
             
+              <div class="item">
+                <img src="/<%= curso.capa %>" alt="Course One">
+                <div class="down-content">
+                  <h4 class="addCurso"><%= curso.titulo %></h4>
+                  <div class="info">
+                    <div class="row">
+                      <a href="/user/curso/add/<%= curso.id %>/<%= usuario.id %>" class="btn btn-sm btn-outline-danger mx-auto rounded-0" onclick="verifica(event,this)">Fazer curso</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }) 
+            }
+          %>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-
-  <section class="meetings-page" id="meetings">
+<!-- Meus cursos -->
+  <section class="meetings-page" id="mine-courses">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
             <div class="col-lg-12">
-              <div class="filters">
-                <ul>
-                  <li data-filter="*"  class="active">All Meetings</li>
-                  <li data-filter=".soon">Soon</li>
-                  <li data-filter=".imp">Important</li>
-                  <li data-filter=".att">Attractive</li>
-                </ul>
+              <div class="section-heading">
+                <h2>Meus Cursos</h2>
               </div>
             </div>
             <div class="col-lg-12">
               <div class="row grid">
-                <div class="col-lg-4 templatemo-item-col all soon">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$14.00</span>
+                <% usuario.cursos.forEach(curso=>{ %>
+                  <div class="col-lg-4 templatemo-item-col all soon">
+                    <div class="meeting-item">
+                      <div class="thumb rounded-0">
+                        <img class="rounded-0" src="/<%=curso.capa%>" alt="">
                       </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-01.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>12</span></h6>
+                      <div class="down-content rounded-0">
+                        
+                        <h4 class="meuscursos"><%=curso.titulo%></h4>
+                        <div class="row">
+                          <a href="/user/curso/<%=usuario.id%>/<%=curso.id%>" class="btn btn-sm btn-danger mx-auto rounded-0 mb-2">Ver curso</a>
+                          <a href="/user/curso/remove/<%=usuario.id%>/<%=curso.id%>" class="btn btn-sm btn-outline-danger mx-auto rounded-0">Remover curso</a>
+                        </div>
                       </div>
-                      <a href="meeting-details.html"><h4>New Lecturers Meeting</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$22.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-02.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>14</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Online Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all soon">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$24.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-03.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>16</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Network Teaching Concept</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$32.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-04.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>18</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Online Teaching Tools</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$34.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-02.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>22</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>New Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$45.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-03.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>24</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Technology Conference</h4></a>
-                      <p>TemplateMo is the best website<br>when it comes to Free CSS.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all imp att">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$52.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-01.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>27</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Online Teaching Techniques</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all soon imp">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$64.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-02.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>28</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Instant Lecture Design</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 templatemo-item-col all att soon">
-                  <div class="meeting-item">
-                    <div class="thumb">
-                      <div class="price">
-                        <span>$74.00</span>
-                      </div>
-                      <a href="meeting-details.html"><img src="assets/images/meeting-03.jpg" alt=""></a>
-                    </div>
-                    <div class="down-content">
-                      <div class="date">
-                        <h6>Nov <span>30</span></h6>
-                      </div>
-                      <a href="meeting-details.html"><h4>Online Social Networking</h4></a>
-                      <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="pagination">
-                <ul>
-                  <li><a href="#">1</a></li>
-                  <li class="active"><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                </ul>
+                <% }) %>
+              
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+<!-- Contact -->
+    <section class="contact-us" id="contact">
+      <div class="container mx-auto">
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="row">
+              <div class="col-lg-12">
+                <form id="contact" action="" class="rounded-0" method="post">
+                    <div class="col-lg-12">
+                      <h2>Peça o seu certificado</h2>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                      <input type="email" name="email" required class="form-control rounded-1" id="floatingInput" placeholder="name@example.com">
+                      <label for="floatingInput">Seu email</label>
+                  </div>
+                    <div class="form-floating col-lg-6 mb-3">
+                      <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                      <label for="floatingSelect" class="ms-2">Selecione o curso</label>
+                    </div>
+
+                    <div class="form-floating">
+                      <textarea class="form-control rounded-1" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                      <label for="floatingTextarea">Assunto</label>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="button rounded-1" disabled>Enviar pedido</button>
+                      </fieldset>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+
+
+      <script>
+        function verifica(event,link){
+          let meuscursos=document.querySelectorAll(".meuscursos")
+          let addCurso=link.parentNode.parentNode.parentNode.querySelector(".addCurso").innerHTML;
+
+          for(i=0; i<= meuscursos.length; i++){
+            if(meuscursos[i].innerHTML == addCurso){
+              event.preventDefault();
+              alert("O curso já foi  adicionado!")
+            }else{
+            }
+          }
+          
+        }
+        function deletar(event,elemento){
+          let nome=document.querySelector("#usuario").value;
+          let recebi= prompt("Digite seu nome se deseja realmente deletar esta conta?");
+          if(recebi == nome){
+            event.submit();
+          }
+          event.preventDefault()
+        }
+      </script>
 <%- include("../partials/footer") %>
