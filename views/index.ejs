@@ -95,7 +95,12 @@
             <% }) %>
           </div>
           <div class="carousel-inner">
-            <% cursos.forEach(curso=>{ %>
+            <% if(cursos[0] == undefined){ %>
+              <div class="text-center">
+                <h3 class="text-muted">Sem destaque</h3>
+              </div>
+            <% }else{
+               cursos.forEach(curso=>{ %>
 
               <div class="carousel-item responsive-height" style="overflow: hidden;">
                 <img src="<%= curso.capa %>" class="d-block w-100" alt="<%= curso.titulo %>">
@@ -104,7 +109,8 @@
                 </div>
               </div>
 
-            <% }) %>
+            <% }) 
+          } %>
             
            
           </div>
